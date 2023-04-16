@@ -6,7 +6,8 @@ import net.minecraft.network.packet.Packet;
 
 public enum PacketType {
     INCOMING("S2C", ChatColor.DARK_GREEN),
-    OUTGOING("C2S", ChatColor.AQUA);
+    OUTGOING("C2S", ChatColor.AQUA),
+    ANY("", ChatColor.WHITE);
 
     private final String determinator;
     private final ChatColor color;
