@@ -11,20 +11,26 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 @Mixin(ClientConnection.class)
-public class PTracerMixin {
+public abstract class PTracerMixin {
+
+    @Shadow public abstract void send(Packet<?> packet);
 
     private static final Logger LOGGER = LoggerFactory.getLogger("PTracer");
 
     @Inject(method = "handlePacket", at = @At("HEAD"))
     private static void apply(Packet<?> packet, PacketListener listener, CallbackInfo ci) {
         if (PTracer.enabled) {
+            if (Arrays.stream(PTracer.filter.getDeterminator()).noneMatch(s -> packet.getClass().getSimpleName().contains(s)))
+                return;
             PTracer tracer = PTracer.initialize(packet);
             tracer.sendWithSettings(tracer.parse());
         }
@@ -33,6 +39,8 @@ public class PTracerMixin {
             at = @At("HEAD"))
     public void send(Packet<?> packet, CallbackInfo ci) {
         if (PTracer.enabled) {
+            if (Arrays.stream(PTracer.filter.getDeterminator()).noneMatch(s -> packet.getClass().getSimpleName().contains(s)))
+                return;
             PTracer tracer = PTracer.initialize(packet);
             tracer.sendWithSettings(tracer.parse());
         }

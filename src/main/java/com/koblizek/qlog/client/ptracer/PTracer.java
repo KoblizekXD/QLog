@@ -22,16 +22,16 @@ import java.util.StringJoiner;
 public final class PTracer {
     private final Packet<?> packet;
     private final PacketType type;
-    private final Settings settings;
+    public static final Settings settings = new Settings();
     private final MinecraftClient mc = MinecraftClient.getInstance();
     private final Logger logger = LoggerFactory.getLogger("PTracer");
     public static boolean enabled = false;
     public static Text text = Text.literal("Enable PTracer");
+    public static Filters filter = Filters.ALL;
 
     private PTracer(Packet<?> packet) {
         this.packet = packet;
         this.type = PacketType.determine(packet);
-        this.settings = new Settings();
     }
     public static void switchStatus() {
         enabled = !enabled;
@@ -68,6 +68,7 @@ public final class PTracer {
             }
         }
     }
+
     public String parse() {
         StringBuilder builder = new StringBuilder();
 

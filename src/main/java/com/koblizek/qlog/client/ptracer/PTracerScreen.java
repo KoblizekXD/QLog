@@ -2,9 +2,6 @@ package com.koblizek.qlog.client.ptracer;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.GridWidget;
-import net.minecraft.client.gui.widget.SimplePositioningWidget;
-import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
@@ -24,6 +21,25 @@ public class PTracerScreen extends Screen {
                             b.setMessage(PTracer.text);
                         })
                 .dimensions(this.width / 2 - 50, this.height / 2 - 100, 100, 20).build());
+        this.addDrawableChild(ButtonWidget
+                .builder(Text.literal("Filter: " + PTracer.filter), b -> {
+                    try {
+                        PTracer.filter = Filters.values()[PTracer.filter.ordinal()+1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        PTracer.filter =  Filters.ALL;
+                    }
+                    b.setMessage(Text.literal("Filter: " + PTracer.filter));
+                }).dimensions(this.width / 2 - 75, this.height / 2 - 76, 150, 20)
+                .build());
+        this.addDrawableChild(ButtonWidget
+                .builder(Text.literal("Logging:" + PTracer.settings.type), b -> {
+                    try {
+                        PTracer.settings.type = PTracer.Settings.LoggingType.values()[PTracer.settings.type.ordinal()+1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        PTracer.settings.type = PTracer.Settings.LoggingType.LOG_ONLY;
+                    }
+                    b.setMessage(Text.literal("Logging: " + PTracer.settings.type));
+                }).dimensions(this.width / 2 - 50, this.height / 2 - 52, 100, 20).build());
     }
 
     @Override

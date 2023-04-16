@@ -1,13 +1,17 @@
 package com.koblizek.qlog.client.ptracer;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.StringJoiner;
+
 public enum Filters {
     ALL(""),
     MOVEMENT("Move", "Teleport", "Velocity", "Position", "Ground"),
     WORLD("World", "Time", "Chunk"),
     PLAYER("Player"),
     ENTITY("Entity"),
-    INCOMING(PacketType.INCOMING, ""),
-    OUTGOING(PacketType.OUTGOING, "");
+    INCOMING(PacketType.INCOMING, "S2C"),
+    OUTGOING(PacketType.OUTGOING, "C2S");
 
     private final PacketType type;
     private final String[] determinator;
@@ -27,5 +31,8 @@ public enum Filters {
 
     public String[] getDeterminator() {
         return determinator;
+    }
+    public String joined() {
+        return String.join(";", determinator);
     }
 }
