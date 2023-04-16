@@ -32,7 +32,7 @@ public class PTracerScreen extends Screen {
                 }).dimensions(this.width / 2 - 75, this.height / 2 - 76, 150, 20)
                 .build());
         this.addDrawableChild(ButtonWidget
-                .builder(Text.literal("Logging:" + PTracer.settings.type), b -> {
+                .builder(Text.literal("Logging: " + PTracer.settings.type), b -> {
                     try {
                         PTracer.settings.type = PTracer.Settings.LoggingType.values()[PTracer.settings.type.ordinal()+1];
                     } catch (ArrayIndexOutOfBoundsException e) {
