@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "qlog",
+  "version": "${version}",
+  "name": "QLog",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/qlog/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.koblizek.qlog.client.QlogClient"
+    ],
+    "main": [
+      "com.koblizek.qlog.Qlog"
+    ]
+  },
+  "mixins": [
+    "qlog.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "fabric": "*",
+    "minecraft": "1.19.4"
+  }
+}
