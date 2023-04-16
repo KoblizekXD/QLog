@@ -1,13 +1,10 @@
 package com.koblizek.qlog.mixin;
 
 import com.koblizek.qlog.client.ptracer.PTracer;
-import com.koblizek.qlog.client.ptracer.PacketType;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.network.ClientConnection;
-import net.minecraft.network.PacketCallbacks;
 import net.minecraft.network.listener.PacketListener;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 
 @Mixin(ClientConnection.class)

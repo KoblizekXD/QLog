@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.koblizek.qlog.client.QlogClient"
+      "com.koblizek.qlog.client.QLogClient"
     ],
     "main": [
       "com.koblizek.qlog.Qlog"
